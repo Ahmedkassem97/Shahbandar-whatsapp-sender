@@ -1,13 +1,13 @@
 {
-  "name": "مرسل واتساب سريع",
-  "short_name": "واتساب سريع",
+  "name": "دليفري شهبندر",
+  "short_name": "دليفري شهبندر",
   "description": "أداة سريعة لإرسال رسالة واتساب جاهزة أو الاتصال بالعميل",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#14171A",
-  "theme_color": "#14171A",
+  "background_color": "#F7F8FA",
+  "theme_color": "#F7F8FA",
   "dir": "rtl",
   "lang": "ar",
   "icons": [

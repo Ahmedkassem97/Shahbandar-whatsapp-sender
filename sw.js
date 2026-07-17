@@ -1,4 +1,4 @@
-const CACHE_NAME = 'wa-sender-v2';
+const CACHE_NAME = 'wa-sender-v3';
 const ASSETS = [
   './index.html',
   './manifest.json',
