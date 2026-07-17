@@ -89,14 +89,14 @@
   .pin-wrap svg{ width:28px; height:28px; }
 
   h1{
-    font-size: 18px;
+    font-size: 21px;
     font-weight:700;
     margin:0;
     letter-spacing:0.2px;
   }
 
   .subtitle{
-    font-size:13px;
+    font-size:15px;
     color:var(--muted);
     margin:0;
     font-weight:500;
@@ -104,7 +104,7 @@
 
   label{
     display:block;
-    font-size:13px;
+    font-size:15px;
     font-weight:600;
     color:var(--muted);
     margin: 18px 4px 8px;
@@ -123,9 +123,9 @@
     border:none;
     color: var(--text);
     font-family:'Cairo', Arial, sans-serif;
-    font-size:16px;
+    font-size:19px;
     font-weight:600;
-    padding: 14px 12px;
+    padding: 16px 12px;
     outline:none;
     appearance:none;
     -webkit-appearance:none;
@@ -153,9 +153,43 @@
     border-color: var(--accent);
   }
 
+  .field.invalid{
+    border-color: #E5484D;
+    background: rgba(229,72,77,0.08);
+  }
+
+  .field.invalid input[type="tel"]::placeholder{
+    color: #E5484D;
+  }
+
+  .toast{
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--surface-2);
+    border: 1px solid #E5484D;
+    color: var(--text);
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight:600;
+    max-width: 90vw;
+    text-align:center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease, transform .25s ease;
+    z-index: 50;
+  }
+
+  .toast.show{
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
   .preview{
     margin: 10px 4px 0;
-    font-size:12.5px;
+    font-size:14px;
     color: var(--muted);
     line-height:1.6;
     min-height: 34px;
@@ -173,9 +207,9 @@
     border:none;
     border-radius:14px;
     font-family:'Cairo', Arial, sans-serif;
-    font-size:16px;
+    font-size:19px;
     font-weight:700;
-    padding:16px;
+    padding:18px;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -203,10 +237,48 @@
 
   .hint{
     text-align:center;
-    font-size:12px;
+    font-size:13px;
     color: var(--muted);
     margin-top:18px;
   }
+
+  .divider{
+    border:none;
+    border-top:1px solid var(--border);
+    margin: 26px 0 16px;
+  }
+
+  .section-label{
+    font-size:13px;
+    font-weight:700;
+    color: var(--muted);
+    margin: 0 4px 10px;
+    letter-spacing:0.3px;
+  }
+
+  .constants-row{
+    display:flex;
+    gap:10px;
+  }
+
+  .btn-secondary{
+    flex:1;
+    font-size:14.5px;
+    font-weight:700;
+    padding:13px 8px;
+    border-radius:12px;
+    border:1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+  }
+
+  .btn-secondary svg{ width:17px; height:17px; }
+
+  .btn-secondary.wa-const{ color: var(--accent); border-color: rgba(47,212,128,0.4); }
+  .btn-secondary.wa-const:active{ background: rgba(47,212,128,0.1); }
+
+  .btn-secondary.call-const{ color: var(--call); border-color: rgba(59,130,246,0.4); }
+  .btn-secondary.call-const:active{ background: rgba(59,130,246,0.1); }
 
   @media (prefers-reduced-motion: reduce){
     .pin-wrap::after{ animation:none; }
@@ -235,18 +307,19 @@
   </div>
 
   <label for="phone">رقم العميل</label>
-  <div class="field">
-    <input type="tel" id="phone" inputmode="tel" placeholder="مثال: 97158xxxxxxx" autocomplete="tel">
+  <div class="field" id="phoneField">
+    <input type="tel" id="phone" inputmode="tel" placeholder="مثال: 0501234567" autocomplete="tel">
   </div>
 
   <label for="msg">الرسالة</label>
   <div class="field">
     <select id="msg">
-      <option value="السلام عليكم، انا سائق التوصيل من مطعم شهبندر لو سمحت ممكن تبعتي اللوكيشن والعنوان">طلب اللوكيشن والعنوان</option>
-      <option value="السلام عليكم، انا سائق التوصيل من مطعم شهبندر، وصلت تحت المبنى، ممكن رقم الشقة أو الفيلا؟">وصلت تحت المبنى</option>
-      <option value="السلام عليكم، طلبكم من مطعم شهبندر في الطريق، هوصل خلال ٥ دقايق تقريبًا">الطلب في الطريق (٥ دقايق)</option>
-      <option value="السلام عليكم، انا سائق التوصيل من مطعم شهبندر، مش لاقي مكانكم بالظبط، ممكن ترسلوا لوكيشن لايف؟">مش لاقي المكان</option>
-      <option value="السلام عليكم، حاولت أتصل ولم يتم الرد، انا سائق التوصيل من مطعم شهبندر، برجاء الرد على الواتساب">حاولت أتصل ومردش حد</option>
+      <option value="أنا سائق التوصيل من مطعم شهبندر، ممكن تبعتلي اللوكيشن والعنوان؟">طلب اللوكيشن والعنوان</option>
+      <option value="أنا سائق التوصيل من مطعم شهبندر، وصلت تحت، ممكن رقم الشقة أو المكتب؟">وصلت تحت (شقة/مكتب)</option>
+      <option value="أنا سائق التوصيل من مطعم شهبندر، وصلت تحت، ممكن رقم الفيلا؟">وصلت تحت (فيلا)</option>
+      <option value="طلبكم من مطعم شهبندر في الطريق، هوصل خلال ٥ دقايق">الطلب في الطريق (٥ دقايق)</option>
+      <option value="أنا سائق التوصيل من مطعم شهبندر، مش لاقي المكان بالظبط، ممكن تبعتلي لوكيشن لايف؟">مش لاقي المكان</option>
+      <option value="حاولت أتصل بيكم ومحدش رد، أنا سائق التوصيل من مطعم شهبندر، برجاء الرد على الواتساب">حاولت أتصل ومحدش رد</option>
     </select>
   </div>
 
@@ -263,8 +336,23 @@
     </button>
   </div>
 
+  <hr class="divider">
+  <p class="section-label">الثوابت</p>
+  <div class="constants-row">
+    <button class="btn-secondary wa-const" onclick="openRestaurantWhatsapp()">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.02c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.12.11-1.81-.11-.42-.13-.95-.31-1.64-.6-2.88-1.24-4.76-4.13-4.9-4.32-.14-.19-1.17-1.56-1.17-2.97 0-1.41.74-2.1 1-2.39.26-.28.57-.35.76-.35.19 0 .38 0 .55.01.18.01.42-.07.65.5.24.58.81 2 .88 2.14.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.16-.29.36-.42.49-.14.14-.28.29-.12.57.16.28.7 1.16 1.51 1.89 1.04.93 1.91 1.22 2.19 1.36.28.14.44.12.6-.07.16-.19.68-.79.87-1.06.18-.28.37-.23.62-.14.26.09 1.63.77 1.91.91.28.14.47.21.54.33.07.12.07.71-.17 1.39z"/></svg>
+      واتساب المطعم
+    </button>
+    <button class="btn-secondary call-const" onclick="callRestaurant()">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.24.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      اتصال بالمطعم
+    </button>
+  </div>
+
   <p class="hint">اضغط على الشاشة الرئيسية "إضافة إلى الشاشة الرئيسية" لتشغيله كتطبيق</p>
 </div>
+
+<div class="toast" id="toast"></div>
 
 <script>
   var phoneInput = document.getElementById('phone');
@@ -334,19 +422,48 @@
     return phoneInput.value.trim().replace(/[^0-9]/g, '');
   }
 
-  // بيضمن ان رمز دولة الإمارات (971) يتضاف دايمًا، مهما كان شكل الرقم:
-  // - لو مكتوب برمز الدولة أصلاً (971xxxxxxxxx) → يسيبه زي ما هو.
-  // - لو مكتوب بصفر في الأول (05xxxxxxxx) → يشيل الصفر ويحط 971 بدالها.
-  // - لو مكتوب من غير صفر ومن غير رمز دولة (5xxxxxxxx) → يحط 971 كامل قبله.
-  function toInternational(digits){
+  // بيرجع رقم المشترك الأساسي بدون رمز الدولة وبدون الصفر في الأول.
+  // مثال: 0542580244 أو 971542580244 أو 542580244 كلهم بيرجعوا "542580244"
+  function getSubscriberNumber(digits){
     if (digits.indexOf('971') === 0) {
-      return digits;
+      return digits.slice(3);
     }
     if (digits.charAt(0) === '0') {
-      return '971' + digits.slice(1);
+      return digits.slice(1);
     }
-    return '971' + digits;
+    return digits;
   }
+
+  // أرقام الموبايل الإماراتية: 9 أرقام بالظبط بعد شيل الصفر/رمز الدولة، وبتبدأ بـ 5 دايمًا.
+  function isValidUAEMobile(digits){
+    var sub = getSubscriberNumber(digits);
+    return sub.length === 9 && sub.charAt(0) === '5';
+  }
+
+  function toInternational(digits){
+    return '971' + getSubscriberNumber(digits);
+  }
+
+  var toastEl = document.getElementById('toast');
+  var phoneField = document.getElementById('phoneField');
+  var toastTimer = null;
+
+  function showError(msg){
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    phoneField.classList.add('invalid');
+    if (navigator.vibrate) {
+      navigator.vibrate(180);
+    }
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){
+      toastEl.classList.remove('show');
+    }, 2600);
+  }
+
+  phoneInput.addEventListener('input', function(){
+    phoneField.classList.remove('invalid');
+  });
 
   function updatePreview(){
     preview.textContent = msgSelect.value;
@@ -357,7 +474,12 @@
   function sendToWhatsapp(){
     var phone = cleanPhone();
     if (phone === "") {
-      alert("برجاء إدخال رقم الهاتف أولاً");
+      showError("برجاء إدخال رقم الهاتف أولاً");
+      phoneInput.focus();
+      return;
+    }
+    if (!isValidUAEMobile(phone)) {
+      showError("الرقم غير مكتمل، تأكد إنه رقم إماراتي صحيح");
       phoneInput.focus();
       return;
     }
@@ -372,13 +494,27 @@
   function callCustomer(){
     var phone = cleanPhone();
     if (phone === "") {
-      alert("برجاء إدخال رقم الهاتف أولاً");
+      showError("برجاء إدخال رقم الهاتف أولاً");
+      phoneInput.focus();
+      return;
+    }
+    if (!isValidUAEMobile(phone)) {
+      showError("الرقم غير مكتمل، تأكد إنه رقم إماراتي صحيح");
       phoneInput.focus();
       return;
     }
     var intlPhone = toInternational(phone);
     addToRecent(phone);
     window.location.href = "tel:+" + intlPhone;
+  }
+
+  // أرقام ثابتة للمطعم نفسه (مش أرقام عملاء)، من غير أي تحقق ديناميكي لأنها معروفة ومظبوطة يدويًا
+  function openRestaurantWhatsapp(){
+    window.location.href = "https://wa.me/971564223906";
+  }
+
+  function callRestaurant(){
+    window.location.href = "tel:+97142837003";
   }
 
   if ('serviceWorker' in navigator) {
